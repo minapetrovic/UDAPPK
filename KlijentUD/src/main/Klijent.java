@@ -105,7 +105,7 @@ public class Klijent {
 			do {
 				msg = serverInput.readLine();
 				System.out.println(msg);
-			} while (msg.equals("-END-"));
+			} while (!msg.equals("-END-"));
 		} catch (IOException e) {
 			System.out.println("Error while reading list.");
 		}
@@ -116,6 +116,10 @@ public class Klijent {
 		System.out.println("Please enter the private key to download file.");
 		try {
 			String key = konzola.readLine();
+			if(key.contains(">>QUIT")) {
+				serverOutput.println(">>QUIT");
+				return;
+			}
 			serverOutput.println(key);
 			if (serverInput.readLine().equals("Valid key.")) {
 				System.out.println("Valid key.");
