@@ -33,9 +33,9 @@ public class Klijent {
 			String msg = serverInput.readLine();
 			System.out.println(msg);
 
-			System.out.println("Hello, welcome to UDAPP!");
+			System.out.println(">>Hello, welcome to UDAPP!");
 			while (value) {
-				System.out.println("Enter following numbers for different action:\n"
+				System.out.println(">>Enter following numbers for different action:\n"
 						+ "0 - register; 1 - login; 2 - logout; 3 - upload; 4 - download; 5 - list; 6 - EXIT.");
 				value = choose();
 			}
@@ -52,7 +52,6 @@ public class Klijent {
 
 	private static boolean choose() {
 		int num;
-
 		try {
 			num = Integer.parseInt(konzola.readLine().toString());
 		} catch (NumberFormatException e) {
@@ -116,8 +115,9 @@ public class Klijent {
 		System.out.println("Please enter the private key to download file.");
 		try {
 			String key = konzola.readLine();
-			if(key.contains(">>QUIT")) {
+			if (key.contains(">>QUIT")) {
 				serverOutput.println(">>QUIT");
+				System.out.println(">>Would you like to try again?");
 				return;
 			}
 			serverOutput.println(key);
@@ -135,6 +135,9 @@ public class Klijent {
 				} while (input.available() != 0);
 				randomAccessFile.close();
 				System.out.println("File successfully saved!");
+			} else {
+				System.out.println(">>Invalid key. Would you like to try again?");
+				return;
 			}
 		} catch (IOException e) {
 			System.out.println("Error while downloading files.");
